@@ -4,10 +4,10 @@ export const Container = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 35px;
+  height: 30px;
   color: #ffffff;
-  background: ${(props) => props.theme.colors.primary};
-  /* background: #1a1a1a; */
+  /* background: ${(props) => props.theme.colors.primary}; */
+  background: #1a1a1a;
 `;
 
 export const FooterText = styled.p`

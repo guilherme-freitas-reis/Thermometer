@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import firebase from "../../../firebase";
 import { getHours, getDate } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -19,59 +20,43 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(temperature, hour, date) {
-  return { temperature, hour, date };
-}
-
 export default function LogsTable() {
   const classes = useStyles();
 
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    const startLog = () => {
+    function start() {
       setInterval(() => {
-        var data = rows;
+        firebase
+          .database()
+          .ref("temperature_real_time")
+          .once("value")
+          .then((snapshot) => {
+            var data = rows;
 
-        const newData = createData(
-          Math.floor(Math.random() * 50),
-          getHours(new Date(), { locale: ptBR }),
-          getDate(new Date(), { locale: ptBR })
-        );
+            var item = {
+              temperature: snapshot.val().temperature_value,
+              date: 2,
+              hour: 2,
+            };
 
-        data.push(newData);
+            data.push(item);
 
-        console.log(data);
-
-        setRows([data]);
+            setRows(data);
+          });
+        console.log(rows);
       }, 1000);
-    };
+    }
 
-    startLog();
+    start();
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table stickyHeader className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Temperatura</TableCell>
-            <TableCell>Hora</TableCell>
-            <TableCell>Data</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.temperature}º celsius
-              </TableCell>
-              <TableCell>{row.hour}</TableCell>
-              <TableCell>{row.date}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      {rows.map((item) => (
+        <div>oi</div>
+      ))}
+    </div>
   );
 }
