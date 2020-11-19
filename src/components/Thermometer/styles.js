@@ -6,11 +6,17 @@ export const Container = styled.main`
   align-items: center;
   justify-content: center;
   padding: 0 ${(props) => props.theme.paddings.containerLg};
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const DataContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 400px;
   height: 400px;
   background: #fff;
