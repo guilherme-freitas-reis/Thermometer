@@ -67,7 +67,6 @@ export const CTA = styled(Link)`
 
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.sizes.ultraSmall};
-    padding: 0 10px;
   }
 
   :hover {
