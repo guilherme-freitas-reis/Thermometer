@@ -39,6 +39,7 @@ export const LogoText = styled.h1`
 
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.sizes.small};
+    margin-left: 5px;
   }
 `;
 
@@ -62,9 +63,11 @@ export const CTA = styled(Link)`
   -moz-box-shadow: 10px 9px 99px 0px rgba(0, 0, 0, 0.37);
   box-shadow: 10px 9px 99px 0px rgba(0, 0, 0, 0.37);
   font-weight: 600;
+  font-size: ${(props) => props.theme.sizes.small};
 
   @media (max-width: 768px) {
-    font-size: ${(props) => props.theme.sizes.small};
+    font-size: ${(props) => props.theme.sizes.ultraSmall};
+    padding: 0 10px;
   }
 
   :hover {

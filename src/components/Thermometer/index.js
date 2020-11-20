@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from "react";
-import Thermometers from 'react-thermometer-component'
+import Thermometers from "react-thermometer-component";
 import firebase from "../../firebase";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import LogsTable from "./LogsTable";
 
-import { Container, DataContainer, LogContainer } from "./styles";
+import { Container, DataContainer, DataHeader, LogContainer } from "./styles";
 
 function Thermometer() {
-
   const [rows, setRows] = useState([]);
   const [temp, setTemp] = useState(30);
 
   useEffect(() => {
     function start() {
-        firebase
-          .database()
-          .ref("temperature_real_time")
-          .on("value", (snapshot) => {
-            var item = {
-              temperature: snapshot.val().temperature_value,
-              date: format(new Date(), "dd/MM/yyyy", { locale: ptBR }),
-              hour: format(new Date(), "HH:mm:ss", { locale: ptBR }),
-            };
+      firebase
+        .database()
+        .ref("temperature_real_time")
+        .on("value", (snapshot) => {
+          var item = {
+            temperature: snapshot.val().temperature_value,
+            date: format(new Date(), "dd/MM/yyyy", { locale: ptBR }),
+            hour: format(new Date(), "HH:mm:ss", { locale: ptBR }),
+          };
 
-            setTemp(snapshot.val().temperature_value)
-            setRows((rows) => [item, ...rows]);
-          });
+          setTemp(snapshot.val().temperature_value);
+          setRows((rows) => [item, ...rows]);
+        });
     }
 
     start();
@@ -35,10 +34,11 @@ function Thermometer() {
   return (
     <Container>
       <DataContainer>
-      <Thermometers
+        <DataHeader>thermometer</DataHeader>
+        <Thermometers
           theme="light"
           value={temp}
-          max="80"
+          max="60"
           steps="3"
           format="°C"
           size="large"
@@ -46,6 +46,7 @@ function Thermometer() {
         />
       </DataContainer>
       <LogContainer>
+        <DataHeader style={{ marginBottom: 0 }}>logs</DataHeader>
         <LogsTable rows={rows} />
       </LogContainer>
     </Container>

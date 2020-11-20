@@ -6,6 +6,7 @@ const theme = {
   },
   fonts: ["sans-serif", "Roboto"],
   sizes: {
+    ultraSmall: ".8em",
     small: "1em",
     mediumSmall: "1.6em",
     medium: "2em",
@@ -15,7 +16,7 @@ const theme = {
     containerXl: "10em",
     containerLg: "7em",
     containerMd: "5em",
-    containerSm: "1rem",
+    containerSm: "1em",
   },
 };
 

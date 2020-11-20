@@ -17,7 +17,7 @@ function Header() {
         <LogoText>thermometer</LogoText>
       </LogoContainer>
       <ActionsContainer>
-        <CTA to="/newsletter/subscribe">receber notificações</CTA>
+        <CTA to="/newsletter/subscribe">inscreva-se</CTA>
       </ActionsContainer>
     </Container>
   );
